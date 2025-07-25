@@ -15,19 +15,18 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note createNoteForUser (String username, String content) {
- Note note = new Note();
- note.setContent(content);
- note.setOwnerUsername(username);
- Note savedNote = noteRepository.save(note);
- return savedNote;
+        Note note = new Note();
+        note.setContent(content);
+        note.setOwnerUsername(username);
+        Note savedNote = noteRepository.save(note); //redundant, used to show what's happening
+        return savedNote;
     }
 
     @Override
     public Note updateNoteForUser (Long noteId, String content, String username) {
         Note note = noteRepository.findById(noteId).orElseThrow(()-> new RuntimeException("Note not found"));
-    note.setContent(content);
-    Note updatedNote = noteRepository.save(note);
-    return updatedNote;
+        note.setContent(content);
+        return noteRepository.save(note); //inline variable, eliminates redundancy
     }
 
     @Override
@@ -37,7 +36,6 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> getNotesForUser(String username){
-        List<Note> personalNotes = noteRepository.findByOwnerUsername(username);
-        return personalNotes;
+        return noteRepository.findByOwnerUsername(username); //inline variable, eliminates redundancy
     }
 }
