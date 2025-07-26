@@ -37,7 +37,7 @@ String username = userDetails.getUsername();
         return noteService.updateNoteForUser(noteId, content,username);
     }
 
-    @DeleteMapping("/{noteId")
+    @DeleteMapping("/{noteId}")
     public void deleteNote(@PathVariable Long noteId, @AuthenticationPrincipal UserDetails userDetails){
         String username = userDetails.getUsername();
         System.out.println("User Details: " + username);
